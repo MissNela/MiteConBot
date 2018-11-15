@@ -211,4 +211,5 @@ async def bans(ctx):
     embed = discord.Embed(title = "List zabanovaných idiotů", description = x, color = 0xFFFFF)
     return await client.say(embed = embed)
 
+
 client.run(os.getenv("BOT_TOKEN")
