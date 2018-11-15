@@ -93,7 +93,7 @@ async def userinfo(ctx, user: discord.Member):
 async def kick(ctx,user:discord.Member):
     if "512694040395907102" in (role.id for role in message.author.roles):
 
-    if user.server_permissions.kick_members:
+    
          
         await client.say('**On/a je mod/admin a nemam pravomoce je/ho kicknout! ') 
         return
