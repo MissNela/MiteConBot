@@ -212,4 +212,4 @@ async def bans(ctx):
     return await client.say(embed = embed)
 
 
-client.run(os.getenv("BOT_TOKEN")
+client.run(os.getenv("BOT_TOKEN"))
