@@ -31,10 +31,10 @@ def is_coo(ctx):
     return ctx.message.author.id == "503217704887386132"
 
 def is_admin(ctx):
-    return ctx.message.author.id == "
+    return ctx.message.author.id == ""
 
 def is_mod(ctx):
-    return ctx.message.author.id == "
+    return ctx.message.author.id == ""
 
 @client.event
 async def on_message(message):
