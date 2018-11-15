@@ -47,7 +47,7 @@ async def help():
     embed = discord.Embed(
         title = "Help",
         description= """
-        Here are all cmds!
+        Zde jsou všechny help příkazy!
         ``/help``
         Ukáže tento message.
        `` /warn``
@@ -68,7 +68,7 @@ async def help():
         Ukáže ban list.
         """
         
-        color = discord.Color.green()
+        
 )
     await client.say(embed=embed)
 
