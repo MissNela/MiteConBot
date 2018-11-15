@@ -27,8 +27,8 @@ async def on_ready():
 def is_owner(ctx):
     return ctx.message.author.id == "470881108444053504, 342364288310312970"
 
-def is_coo(ctx):
-    return ctx.message.author.id == "503217704887386132"
+def is_staff(ctx):
+    return ctx.message.author.id == "512694040395907102"
 
 def is_admin(ctx):
     return ctx.message.author.id == ""
@@ -64,10 +64,11 @@ async def help():
        `` Ping``
         Řekne :ping_pong: Pong!
         
-        ``Scpbans``
+        ``/bans``
         Ukáže ban list.
         """
         
+        color = discord.Color.purple()
         
 )
     await client.say(embed=embed)
@@ -87,8 +88,8 @@ async def userinfo(ctx, user: discord.Member):
 
 @client.command(pass_context=True)  
 @commands.has_permissions(kick_members=True)     
-@commands.check(is_coo)
-@commands.check(is_owner)
+@commands.check(is_staff)
+
 async def kick(ctx,user:discord.Member):
 
     if user.server_permissions.kick_members:
@@ -107,8 +108,8 @@ async def kick(ctx,user:discord.Member):
     
 @client.command(pass_context=True)  
 @commands.has_permissions(ban_members=True) 
-@commands.check(is_coo)
-@commands.check(is_owner)
+@commands.check(is_staff)
+
 async def ban(ctx,user:discord.Member):
 
     if user.server_permissions.ban_members:
@@ -159,8 +160,8 @@ async def serverinfo(ctx):
 
 @client.command(pass_context=True)  
 @commands.has_permissions(ban_members=True)     
-@commands.check(is_coo)
-@commands.check(is_owner)
+@commands.check(is_staff)
+
 async def unban(ctx):
     ban_list = await client.get_bans(ctx.message.server)
 
@@ -185,8 +186,8 @@ async def unban(ctx):
 
 @client.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
-@commands.check(is_coo)
-@commands.check(is_owner)
+@commands.check(is_staff)
+
 async def warn(ctx, userName: discord.User, *, message:str):
         await client.send_message(userName, "Byl jsi varován za: {}".format(message)) 
         await client.say("Varování {0} Byl varován! Dúvod : {1} ".format(userName,message))
@@ -199,8 +200,8 @@ async def restart():
 
 @client.command(pass_context = True)
 @commands.has_permissions(manage_nicknames=True)   
-@commands.check(is_coo)
-@commands.check(is_owner)
+@commands.check(is_staff)
+
 async def setnick(ctx, user: discord.Member, *, nickname):
     await client.change_nickname(user, nickname)
     await client.delete_message(ctx.message)
