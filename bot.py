@@ -28,7 +28,7 @@ def is_owner(ctx):
     return ctx.message.author.id == "470881108444053504, 342364288310312970"
 
 def is_staff(ctx):
-    return ctx.message.role.id == "512694040395907102"
+    return ctx.user.role.id == "512694040395907102"
 
 def is_admin(ctx):
     return ctx.message.author.id == ""
