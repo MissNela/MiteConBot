@@ -68,7 +68,7 @@ async def help():
         Ukáže ban list.
         """
        
-    colour = discord.Color.purple()
+    color = discord.Color.purple()
 )
     await client.say(embed=embed)
 
