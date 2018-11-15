@@ -67,8 +67,8 @@ async def help():
         ``Scpbans``
         Ukáže ban list.
         """
-       
-    color: discord.Color.purple()
+        
+        color = discord.Color.purple()
 )
     await client.say(embed=embed)
 
