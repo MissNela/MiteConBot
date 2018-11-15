@@ -88,11 +88,13 @@ async def userinfo(ctx, user: discord.Member):
 
 @client.command(pass_context=True)  
 @commands.has_permissions(kick_members=True)     
-@commands.check(is_staff)
+
 
 async def kick(ctx,user:discord.Member):
+    if "512694040395907102" in (role.id for role in message.author.roles):
 
     if user.server_permissions.kick_members:
+         
         await client.say('**On/a je mod/admin a nemam pravomoce je/ho kicknout! ') 
         return
     
@@ -104,6 +106,7 @@ async def kick(ctx,user:discord.Member):
     except discord.Forbidden:
         await client.say('Permission denied.')
         return
+   
 
     
 @client.command(pass_context=True)  
@@ -113,6 +116,7 @@ async def kick(ctx,user:discord.Member):
 async def ban(ctx,user:discord.Member):
 
     if user.server_permissions.ban_members:
+        if message.author.id == 
         await client.say('**On/a je Mod/Admin a jsem neoprávněn je zabanovat!**')
         return
 
