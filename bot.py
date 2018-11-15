@@ -116,7 +116,7 @@ async def kick(ctx,user:discord.Member):
 async def ban(ctx,user:discord.Member):
 
     if user.server_permissions.ban_members:
-        if message.author.id == 
+        
         await client.say('**On/a je Mod/Admin a jsem neoprávněn je zabanovat!**')
         return
 
