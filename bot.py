@@ -25,7 +25,10 @@ async def on_ready():
     print("The bot is online and connected with Discord!")
 
 def is_owner(ctx):
-    return ctx.message.author.id == "
+    return ctx.message.author.id == "470881108444053504, 342364288310312970"
+
+def is_coo(ctx):
+    return ctx.message.author.id == "503217704887386132"
 
 def is_admin(ctx):
     return ctx.message.author.id == "
@@ -45,33 +48,26 @@ async def help():
         title = "Help",
         description= """
         Here are all cmds!
-        ``Scphelp``
-        Shows this message.
-       `` Scpwarn``
-        Admin only/Warns a user.
-        ``Scpban ``
-        Bans a user. Admin perms.
-        ``Scpunban``
-        Unbans a use if not specified (unbans last user)
-        ``Scpserverinfo``
-        Shows Info about server.
-       `` Scpuserinfo``
-        Shows Info about user.
+        ``/help``
+        Ukáže tento message.
+       `` /warn``
+        Admin pouze! /warn @user Dúvod.
+        ``/ban ``
+        Zabanuje Uživatele. /ban @user.
+        ``/unban``
+        Odbanuje uživatele (Pokud není napsán odbanuje posledního v banlistu).
+        ``/serverinfo``
+        Zobrazí Info o serveru.
+       `` /userinfo``
+        Zobrazí info o hráči.
        
        `` Ping``
-        Says :ping_pong: Pong!
-        ``Scpmakemod``
-        Makes a mod. Usage ``Scpmakemod @user``
-        ``Scpremovemod``
-        Removes mod. Usage: ``Scpremovemod @user``
-        ``Scppoll``
-        Makes a poll. Usage: ``Scppoll <Question>``
-        ``Scpbans``
-        Shows a ban list
-        ``Scpsetnick``
-        Sets someone's nick. Usage: ``Scpsetnick @user <Nick>""",
+        Řekne :ping_pong: Pong!
         
-        color = discord.Color.orange()
+        ``Scpbans``
+        Ukáže ban list.
+        """
+        color = discord.Color.purple()
 )
     await client.say(embed=embed)
 
@@ -91,15 +87,16 @@ async def userinfo(ctx, user: discord.Member):
 @client.command(pass_context=True)  
 @commands.has_permissions(kick_members=True)     
 @commands.check(is_mod)
+
 async def kick(ctx,user:discord.Member):
 
     if user.server_permissions.kick_members:
-        await client.say('**He is mod/admin and i am unable to kick him/her**')
+        await client.say('**On/a je mod/admin a nemam pravomoce je/ho kicknout! ') 
         return
     
     try:
         await client.kick(user)
-        await client.say(user.name+' was kicked. Good bye '+user.name+'!')
+        await client.say(user.name+' Byl kicknutej! Papa :wave:   '+user.name+'!')
         await client.delete_message(ctx.message)
 
     except discord.Forbidden:
@@ -109,16 +106,16 @@ async def kick(ctx,user:discord.Member):
     
 @client.command(pass_context=True)  
 @commands.has_permissions(ban_members=True) 
-@commands.check(is_admin)
+@commands.check(is_coo, is_owner)
 async def ban(ctx,user:discord.Member):
 
     if user.server_permissions.ban_members:
-        await client.say('**He is mod/admin and i am unable to ban him/her**')
+        await client.say('**On/a je Mod/Admin a jsem neoprávněn je zabanovat!**')
         return
 
     try:
         await client.ban(user)
-        await client.say(user.name+' was banned. Good bye '+user.name+'!')
+        await client.say(user.name+'Byl zabanován!'+user.name+'!')
 
     except discord.Forbidden:
 
@@ -160,7 +157,7 @@ async def serverinfo(ctx):
 
 @client.command(pass_context=True)  
 @commands.has_permissions(ban_members=True)     
-@commands.check(is_admin)
+@commands.check(is_coo, is_owner)
 
 async def unban(ctx):
     ban_list = await client.get_bans(ctx.message.server)
@@ -171,7 +168,7 @@ async def unban(ctx):
     # Unban last banned user
     if not ban_list:
     	
-        await client.say('Ban list is empty.')
+        await client.say('Ban list je prázdný.')
         return
     try:
         await client.unban(ctx.message.server, ban_list[-1])
@@ -180,16 +177,16 @@ async def unban(ctx):
         await client.say('Permission denied.')
         return
     except discord.HTTPException:
-        await client.say('unban failed.')
+        await client.say('unban selhal.')
         return		      	 		 		  
 
 
 @client.command(pass_context=True)
 @commands.has_permissions(kick_members=True)
-@commands.check(is_mod)
+@commands.check(is_coo, is_owner)
 async def warn(ctx, userName: discord.User, *, message:str):
-        await client.send_message(userName, "You have been warned for: {}".format(message)) 
-        await client.say("warning {0} Has Been Warned! Warning Reason : {1} ".format(userName,message))
+        await client.send_message(userName, "Byl jsi varován za: {}".format(message)) 
+        await client.say("Varování {0} Byl varován! Dúvod : {1} ".format(userName,message))
         pass
 
 @client.command(pass_context = True)
@@ -198,7 +195,8 @@ async def restart():
     await client.logout()
 
 @client.command(pass_context = True)
-@commands.has_permissions(manage_nicknames=True)     
+@commands.has_permissions(manage_nicknames=True)   
+@commands.check(is_coo, is_owner)
 async def setnick(ctx, user: discord.Member, *, nickname):
     await client.change_nickname(user, nickname)
     await client.delete_message(ctx.message)
@@ -209,7 +207,7 @@ async def bans(ctx):
     '''Gets A List Of Users Who Are No Longer With us'''
     x = await client.get_bans(ctx.message.server)
     x = '\n'.join([y.name for y in x])
-    embed = discord.Embed(title = "List of The Banned Idiots", description = x, color = 0xFFFFF)
+    embed = discord.Embed(title = "List zabanovaných idiotů", description = x, color = 0xFFFFF)
     return await client.say(embed = embed)
 
 client.run(os.getenv("BOT_TOKEN")
