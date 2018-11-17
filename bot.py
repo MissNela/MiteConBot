@@ -120,7 +120,7 @@ async def kick(ctx,user:discord.Member):
 async def hosting():
     embed = discord.Embed(
         title = "Hosting"
-        description = """
+        description= """
         Zde je ukázáno kde hostujeme bota.
         Jako první věc je __Github__
         https://www.github.com
