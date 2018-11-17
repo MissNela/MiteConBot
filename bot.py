@@ -50,14 +50,19 @@ async def help():
         Zde jsou všechny help příkazy!
         ``/help``
         Ukáže tento message.
+       
        `` /warn``
         Admin pouze! /warn @user Dúvod.
-        ``/ban ``
+       
+       ``/ban ``
         Zabanuje Uživatele. /ban @user.
+        
         ``/unban``
         Odbanuje uživatele (Pokud není napsán odbanuje posledního v banlistu).
+        
         ``/serverinfo``
         Zobrazí Info o serveru.
+       
        `` /userinfo``
         Zobrazí info o hráči.
        
@@ -66,6 +71,10 @@ async def help():
         
         ``/bans``
         Ukáže ban list.
+        
+        ``/hosting``
+        Ukáže ti kdo hostuje bota.
+        
         """
         
         
@@ -107,7 +116,21 @@ async def kick(ctx,user:discord.Member):
         await client.say('Permission denied.')
         return
    
+@client.command()
+async def hosting():
+    embed = discord.Embed(
+        title = "Hosting"
+        description = """
+        Zde je ukázáno kde hostujeme bota.
+        Jako první věc je __Github__
+        https://www.github.com
+        Jako druhá věc je __Heroku__
+        https://www.heroku.com
+        """
 
+        color = discord.Color.green()
+)
+    await client.say(embed=embed)
     
 @client.command(pass_context=True)  
 @commands.has_permissions(ban_members=True) 
