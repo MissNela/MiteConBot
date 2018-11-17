@@ -118,18 +118,14 @@ async def kick(ctx,user:discord.Member):
    
 @client.command()
 async def hosting():
-    embed = discord.Embed(
-        title = "Hosting"
-        description= """
-        Zde je ukázáno kde hostujeme bota.
-        Jako první věc je __Github__
-        https://www.github.com
-        Jako druhá věc je __Heroku__
-        https://www.heroku.com
-        """
-
-        color = discord.Color.green()
-)
+    r, g, b = tuple(int(x * 255) for x in colorsys.hsv_to_rgb(random.random(), 1, 1))
+    embed = discord.Embed(color = discord.Color((r << 16) + (g << 8) + b))
+    embed.set_author(name='Hosting')
+    embed.set_image(url = 'https://image.ibb.co/caM2BK/help.gif')
+    embed.add_field(name = '``Support Server`` ',value ='https://discord.gg/A36parZ',inline = False)
+    embed.add_field(name = 'Github',value ='https://www.github.com',inline = False)
+    embed.add_field(name = 'Heroku',value ='https://heroku.com',inline = False)
+    
     await client.say(embed=embed)
     
 @client.command(pass_context=True)  
